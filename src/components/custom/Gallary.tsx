@@ -1,5 +1,4 @@
 
-import { motion } from 'motion/react';
 
 export default function Gallery() {
     const musicImages = [

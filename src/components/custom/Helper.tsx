@@ -7,32 +7,6 @@ const Helper = () => {
         hidden: { opacity: 0, x: -40 },
     }
 
-    const musicImages = [
-        {
-            alt: "Live Concert Scene",
-            src: "https://images.unsplash.com/photo-1511379938547-c1f69419868d"
-        },
-        {
-            alt: "Guitar Close-up",
-            src: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad"
-        },
-        {
-            alt: "Vinyl Record Player",
-            src: "https://images.unsplash.com/photo-1507838153414-b4b713384a76"
-        },
-        {
-            alt: "Headphones & Music",
-            src: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4"
-        },
-        {
-            alt: "DJ Mixing Music",
-            src: "https://images.unsplash.com/photo-1574169208507-84376144848b"
-        },
-        {
-            alt: "Piano Keys",
-            src: "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc"
-        }
-    ];
 
     return (
         <>
