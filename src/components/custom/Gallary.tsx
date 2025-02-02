@@ -1,5 +1,5 @@
 
-
+import { motion } from 'motion/react'
 export default function Gallery() {
     const musicImages = [
         { alt: "Live Concert Scene", src: "https://images.unsplash.com/photo-1511379938547-c1f69419868d" },
@@ -10,36 +10,38 @@ export default function Gallery() {
         { alt: "Piano Keys", src: "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc" }
     ];
 
+
+
     return (
         <div className=" mt-20">
-            
-        <div className="flex flex-wrap md:-m-2 -m-1">
-            <div className="flex flex-wrap w-1/2">
-                <div className="md:p-2 p-1 w-1/2">
-                <img alt={musicImages[0].alt} className="w-full object-cover h-full object-center block hover:scale-95 transition-all duration-150  " src={musicImages[0].src} />
-          
 
+            <div className="flex flex-wrap md:-m-2 -m-1">
+                <div className="flex flex-wrap w-1/2">
+                    <motion.div className="md:p-2 p-1 w-1/2" whileHover={{ scale: 0.95 }} >
+                        <img alt={musicImages[0].alt} className="w-full object-cover h-full object-center block  transition-all duration-150  " src={musicImages[0].src} />
+
+
+                    </motion.div>
+                    <motion.div className="md:p-2 p-1 w-1/2" whileHover={{ scale: 0.95 }}>
+                        <img alt={musicImages[1].alt} className="w-full object-cover h-full object-center block  transition-all duration-150 ease-in-out" src={musicImages[1].src} />
+                    </motion.div>
+                    <motion.div className="md:p-2 p-1 w-full" whileHover={{ scale: 0.95 }}>
+                        <img alt={musicImages[2].alt} className="w-full h-full object-cover object-center block  transition-all duration-150 ease-in-out" src={musicImages[2].src} />
+                    </motion.div>
                 </div>
-                <div className="md:p-2 p-1 w-1/2">
-                    <img alt={musicImages[1].alt} className="w-full object-cover h-full object-center block hover:scale-95 transition-all duration-150 ease-in-out" src={musicImages[1].src} />
-                </div>
-                <div className="md:p-2 p-1 w-full">
-                    <img alt={musicImages[2].alt} className="w-full h-full object-cover object-center block hover:scale-95 transition-all duration-150 ease-in-out" src={musicImages[2].src} />
+                <div className="flex flex-wrap w-1/2">
+                    <motion.div className="md:p-2 p-1 w-full" whileHover={{ scale: 0.95 }}>
+                        <img alt={musicImages[3].alt} className="w-full h-full object-cover object-center block  transition-all duration-150 ease-in-out" src={musicImages[3].src} />
+                    </motion.div>
+                    <motion.div className="md:p-2 p-1 w-1/2" whileHover={{ scale: 0.95 }}>
+                        <img alt={musicImages[4].alt} className="w-full object-cover h-full object-center block  transition-all duration-150 ease-in-out" src={musicImages[4].src} />
+                    </motion.div>
+                    <motion.div className="md:p-2 p-1 w-1/2" whileHover={{ scale: 0.95 }}>
+                        <img alt={musicImages[5].alt} className="w-full object-cover h-full object-center block  transition-all duration-150 ease-in-out" src={musicImages[5].src} />
+                    </motion.div>
                 </div>
             </div>
-            <div className="flex flex-wrap w-1/2">
-                <div className="md:p-2 p-1 w-full">
-                    <img alt={musicImages[3].alt} className="w-full h-full object-cover object-center block hover:scale-95 transition-all duration-150 ease-in-out" src={musicImages[3].src} />
-                </div>
-                <div className="md:p-2 p-1 w-1/2">
-                    <img alt={musicImages[4].alt} className="w-full object-cover h-full object-center block hover:scale-95 transition-all duration-150 ease-in-out" src={musicImages[4].src} />
-                </div>
-                <div className="md:p-2 p-1 w-1/2">
-                    <img alt={musicImages[5].alt} className="w-full object-cover h-full object-center block hover:scale-95 transition-all duration-150 ease-in-out" src={musicImages[5].src} />
-                </div>
-            </div>
-        </div>
-        
+
         </div>
     );
 }
