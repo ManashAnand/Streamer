@@ -16,7 +16,7 @@ export default function Gallery() {
         <div className="flex flex-wrap md:-m-2 -m-1">
             <div className="flex flex-wrap w-1/2">
                 <div className="md:p-2 p-1 w-1/2">
-                <img alt={musicImages[0].alt} className="w-full object-cover h-full object-center block hover:scale-95 transition-all duration-150 ease-in-out " src={musicImages[0].src} />
+                <img alt={musicImages[0].alt} className="w-full object-cover h-full object-center block hover:scale-95 transition-all duration-150  " src={musicImages[0].src} />
           
 
                 </div>
