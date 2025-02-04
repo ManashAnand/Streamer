@@ -4,44 +4,53 @@ import { Input } from "@/components/ui/input"
 import { MetricsCard } from "@/components/custom/DashboardDriven/metrics-card"
 import { StatsChart } from "@/components/custom/DashboardDriven/stats-chart"
 import { VaultTable } from "@/components/custom/DashboardDriven/vault-table"
-import { BarChart3, ChevronDown, Globe, Home, LayoutDashboard, LifeBuoy, Settings, User, Wallet } from "lucide-react"
+import { BarChart3, ChevronDown, Globe, GrapeIcon, Home, LayoutDashboard, LifeBuoy, Settings, User, UserIcon, Wallet, WorkflowIcon } from "lucide-react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+
 
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import { BsGraphDownArrow } from "react-icons/bs"
+import { PieChartGraph } from "@/components/custom/DashboardDriven/pie-chart"
+import { BarChartGraph } from "@/components/custom/DashboardDriven/bar-chart"
 
 const Dashboard = () => {
     const metricsData = [
         {
             title: "Total Users",
             value: "5006",
-            change: { value: "1,340", percentage: "2.1%", isPositive: true },
+            change: { value: "1,340", percentage: "2.1%", isPositive: false },
             bgColor: "#ACDDDE",
             chart: <BarChart3 />,
         },
         {
-            title: "Your Deposits",
-            value: "$54,892",
-            change: { value: "$1,340", percentage: "+13.2%", isPositive: true },
+            title: "Active Users",
+            value: "200",
+            change: { value: "11", percentage: "+1.2%", isPositive: true },
             bgColor: "#CAF1DE",
             chart: <Globe />,
         },
         {
-            title: "Accrued Yield",
-            value: "$20,892",
-            change: { value: "$1,340", percentage: "+1.2%", isPositive: true },
+            title: "Total Streams",
+            value: "230",
+            change: { value: "140", percentage: "+1.2%", isPositive: true },
             bgColor: "#E1F8DC",
+
+            chart: <WorkflowIcon />,
         },
         {
-            title: "Accrued Yield",
-            value: "$20,892",
+            title: "Revenue",
+            value: "$80,892",
             change: { value: "$1,340", percentage: "+1.2%", isPositive: true },
             bgColor: "#E1F8DC",
+            chart: <BsGraphDownArrow />,
         },
         {
-            title: "Accrued Yield",
-            value: "$20,892",
-            change: { value: "$1,340", percentage: "+1.2%", isPositive: true },
+            title: "Top Artist",
+            value: "Kumar Sanu",
+            change: { value: "", percentage: "", isPositive: false },
             bgColor: "#E1F8DC",
+            chart: <UserIcon />,
         },
     ];
 
@@ -49,7 +58,7 @@ const Dashboard = () => {
     console.log(hoveredIndex)
     return (
         <>
-            <motion.div initial={{ y: -50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} className="min-h-screen bg-white/5 text-green-300 rounded-md">
+            <motion.div initial={{ y: -50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} className="min-h-screen bg-white/5 text-green-300 rounded-md  m-2 ">
                 <div className="grid lg:grid-cols-[280px_1fr]">
                     <aside className="border-r border-green-500  backdrop-blur bg-transparent rounded-md">
                         <div className="flex h-16 items-center gap-2 border-b px-6">
@@ -97,12 +106,9 @@ const Dashboard = () => {
                                 <h1 className="text-2xl font-bold">Analytics</h1>
                                 <div className="text-sm text-muted-foreground">Jan 1, 2025 - Feb 1, {new Date().getUTCFullYear()}</div>
                             </div>
-                            <Button variant="outline" className="gap-2 text-black">
-                                Ethereum Network
-                                <ChevronDown className="h-4 w-4" />
-                            </Button>
+
                         </div>
-                        <div className="grid gap-4 md:grid-cols-3 center justify-center ">
+                        <div className="grid gap-4 md:grid-cols-3 center sm:justify-center ">
                             {
                                 metricsData?.map((metric, idx) => {
                                     return (
@@ -138,10 +144,10 @@ const Dashboard = () => {
                                 })
                             }
                         </div>
-                        <Card className="mt-6 p-6">
-                            <div className="mb-4 flex items-center justify-between">
+                        <Card className="mt-6 p-6 bg-green-200/20 border-none text-white/80 hidden sm:block">
+                            <div className="mb-4 flex items-center justify-between flex-col sm:flex-row">
                                 <h2 className="text-lg font-semibold">General Statistics</h2>
-                                <div className="flex gap-2">
+                                <div className="flex gap-2 flex-col sm:flex-row">
                                     <Button size="sm" variant="ghost">
                                         Today
                                     </Button>
@@ -159,9 +165,26 @@ const Dashboard = () => {
                                     </Button>
                                 </div>
                             </div>
-                            <StatsChart />
+                            <div className="">
+                                <Tabs defaultValue="Growth" className="w-full">
+                                    <TabsList>
+                                        <TabsTrigger value="Growth">Growth</TabsTrigger>
+                                        <TabsTrigger value="Revenue">Revenue</TabsTrigger>
+                                        <TabsTrigger value="five">Top 5 songs</TabsTrigger>
+                                    </TabsList>
+                                    <TabsContent value="Growth">
+                                        <StatsChart />
+                                    </TabsContent>
+                                    <TabsContent value="Revenue">
+                                        <PieChartGraph />
+                                    </TabsContent>
+                                    <TabsContent value="five">
+                                        <BarChartGraph />
+                                    </TabsContent>
+                                </Tabs>
+                            </div>
                         </Card>
-                        <div className="mt-6">
+                        <div className="mt-6 hidden sm:block">
                             <VaultTable />
                         </div>
                     </main>
