@@ -16,7 +16,7 @@ interface MetricsCardProps {
   chart?: React.ReactNode
 }
 
-export function MetricsCard({ title, value, change, chart,bgColor="bg-transparent" }: MetricsCardProps) {
+export function MetricsCard({ title, value, change, chart }: MetricsCardProps) {
   return (
     <Card className={`p-4  backdrop-blur text-white  bg-transparent `}>
       <div className="flex items-center justify-between mb-4">
