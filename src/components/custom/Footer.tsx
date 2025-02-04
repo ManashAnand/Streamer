@@ -1,20 +1,50 @@
 import { motion } from "motion/react";
 import { useState } from "react";
+import { FaGithub, FaTwitter, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
 const Footer = () => {
+  const iconSize = 20; 
+
+  const icons = [
+    {
+      icon: <FaGithub size={iconSize} />,
+      url: 'https://github.com/ManashAnand',
+      ariaLabel: 'GitHub',
+      backgroundColor: '#24292e',
+    },
+    {
+      icon: <FaTwitter size={iconSize} />,
+      url: 'https://twitter.com/manashanand2',
+      ariaLabel: 'Twitter',
+      backgroundColor: '#1da1f2',
+    },
+    {
+      icon: <FaLinkedin size={iconSize} />,
+      url: 'https://www.linkedin.com/in/manash-anand-479812227/',
+      ariaLabel: 'LinkedIn',
+      backgroundColor: '#0077b5',
+    },
+    {
+      icon: <FaEnvelope size={iconSize} />,
+      url: 'mailto:anandmanash321@gmail.com',
+      ariaLabel: 'Email',
+      backgroundColor: '#d44638',
+    },
+  ];
+
   const [open, setOpen] = useState(false);
 
   const parentVariants = {
-    hidden: { y: 200, opacity: 0 }, 
+    hidden: { y: 200, opacity: 0 },
     visible: {
-      y: 0, 
+      y: 0,
       opacity: 1,
       transition: {
-        duration: 1.5, 
+        duration: 1.5,
         ease: "easeOut",
-        when: "beforeChildren", 
-        staggerChildren: 0.3, 
-        delayChildren: 0.2, 
+        when: "beforeChildren",
+        staggerChildren: 0.3,
+        delayChildren: 0.2,
       },
     },
   };
@@ -51,7 +81,7 @@ const Footer = () => {
                   {["First Link", "Second Link", "Third Link", "Fourth Link"].map((link, i) => (
                     <motion.li
                       key={i}
-                      variants={childVariants} 
+                      variants={childVariants}
                       className="text-white/60 hover:text-green-200 cursor-pointer"
                     >
                       {link}
@@ -65,13 +95,31 @@ const Footer = () => {
       )}
 
       <motion.div id="bottomName" className="bg-green-100 rounded-t-sm" onViewportEnter={() => setOpen(true)}>
-        <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+        <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row justify-between">
           <p className="text-gray-500 text-sm text-center sm:text-left">
             © 2025 Streamify —
             <a href="https://twitter.com/manashanand2" rel="noopener noreferrer" className="text-gray-600 ml-1" target="_blank">
               @Manash
             </a>
           </p>
+          <span className="text-black">
+            <div className="flex space-x-4">
+              {icons.map((item, index) => (
+                <motion.a
+                  whileHover={{scale:0.9,background:item.backgroundColor}}
+                  transition={{duration:1}}
+                  key={index}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={item.ariaLabel}
+                  className="overflow-hidden p-2 rounded-full text-black hover:text-white"
+                >
+                  {item.icon}
+                </motion.a>
+              ))}
+            </div>
+          </span>
         </div>
       </motion.div>
     </footer>
