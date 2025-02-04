@@ -14,7 +14,7 @@ const Footer = () => {
         ease: "easeOut",
         when: "beforeChildren", 
         staggerChildren: 0.3, 
-        delayChildren: 0.5, 
+        delayChildren: 0.2, 
       },
     },
   };

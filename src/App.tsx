@@ -4,6 +4,7 @@ import Layout from './components/custom/Layout'
 import Base from './pages/Base'
 import Helper from './components/custom/Helper'
 import Pricing from './components/custom/Pricing'
+import Dashboard from './pages/Dashboard'
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
             <Pricing/>
             </>
             } />
-          <Route path='/xyz' element={<div className='bg-blue-400'> hey from xyz </div>} />
+          <Route path='/dashboard' element={<Dashboard/>} />
         </Route>
       </Routes>
 

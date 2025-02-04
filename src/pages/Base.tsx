@@ -1,6 +1,6 @@
 import CTABtn from "@/components/custom/CTABtn";
 import { motion } from "motion/react"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Base = () => {
     const [animationComplete, setAnimationComplete] = useState(false);
@@ -17,7 +17,12 @@ const Base = () => {
     }
 
     const transition = { duration: 4, ease: "easeInOut" }
-    console.log(animationComplete)
+
+    useEffect(() => {
+        fetch("/metrics")
+        .then((response) => response.json())
+        .then((json) => console.log(json))
+    },[])
     return (
         <>
             <div className="bg-red-100/5 min-h-[70vh] flex justify-center items-center">
