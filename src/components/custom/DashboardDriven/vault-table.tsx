@@ -1,106 +1,162 @@
-import { Avatar } from "@/components/ui/avatar"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { MoreHorizontal } from "lucide-react"
+import { useMemo, useState } from "react";
+import { motion } from 'motion/react';
 
-const vaults = [
-  {
-    name: "Bitcoin",
-    symbol: "BTC",
-    price: "$13,643.21",
-    daily: "+$213.8",
-    balance: "$13,954.04",
-    apy: "8.56%",
-    state: "Fixed",
-    startDate: "05.10.2023",
-    liquidity: "high",
-  },
-  {
-    name: "USDT",
-    symbol: "USDT",
-    price: "$1.00",
-    daily: "+$45.1",
-    balance: "$3,954.04",
-    apy: "5.44%",
-    state: "Fixed",
-    startDate: "12.03.2023",
-    liquidity: "medium",
-  },
-  {
-    name: "Ethereum",
-    symbol: "ETH",
-    price: "$2,123.87",
-    daily: "+$13.5",
-    balance: "$3,954.04",
-    apy: "4.12%",
-    state: "Flexible",
-    startDate: "21.01.2023",
-    liquidity: "low",
-  },
-]
+
 
 export function VaultTable() {
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [sortField, setSortField] = useState<"streamCount" | "dateStreamed">("streamCount");
+
+
+  const handleSortClick = (field: "streamCount" | "dateStreamed") => {
+    console.log("Sorting by:", field);
+    if (field === sortField) {
+      setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+    } else {
+      setSortField(field);
+      setSortOrder("desc");
+    }
+  };
+  const sortedStreams = useMemo(() => {
+
+
+    const streams = [
+      {
+        songName: "Kesariya",
+        artist: "Arijit Singh",
+        dateStreamed: "2023-06-01",
+        streamCount: 1000000,
+        userId: "user123",
+        duration: "4:28",
+        genre: "Romantic",
+        album: "Brahmastra",
+        language: "Hindi",
+      },
+      {
+        songName: "Raataan Lambiyan",
+        artist: "Jubin Nautiyal",
+        dateStreamed: "2023-06-02",
+        streamCount: 850000,
+        userId: "user456",
+        duration: "3:50",
+        genre: "Romantic",
+        album: "Shershaah",
+        language: "Hindi",
+      },
+      {
+        songName: "Param Sundari",
+        artist: "Shreya Ghoshal",
+        dateStreamed: "2023-06-03",
+        streamCount: 720000,
+        userId: "user789",
+        duration: "3:15",
+        genre: "Dance",
+        album: "Mimi",
+        language: "Hindi",
+      },
+      {
+        songName: "Teri Mitti",
+        artist: "B Praak",
+        dateStreamed: "2023-06-04",
+        streamCount: 680000,
+        userId: "user012",
+        duration: "5:12",
+        genre: "Patriotic",
+        album: "Kesari",
+        language: "Hindi",
+      },
+      {
+        songName: "Ranjha",
+        artist: "Jasleen Royal",
+        dateStreamed: "2023-06-05",
+        streamCount: 900,
+        userId: "user345",
+        duration: "3:48",
+        genre: "Romantic",
+        album: "Shershaah",
+        language: "Hindi",
+      },
+    ]
+
+    const sorted = [...streams];
+    sorted.sort((a, b) => {
+      if (sortField === "streamCount") {
+        return sortOrder === "asc" ? a.streamCount - b.streamCount : b.streamCount - a.streamCount;
+      } else {
+        const dateA = new Date(a.dateStreamed);
+        const dateB = new Date(b.dateStreamed);
+        return sortOrder === "asc" ? dateA.getTime() - dateB.getTime() : dateB.getTime() - dateA.getTime();
+      }
+    });
+    return sorted;
+  }, [ sortField, sortOrder]);
+
+
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Vault</TableHead>
-          <TableHead>Daily</TableHead>
-          <TableHead>Balance ↓</TableHead>
-          <TableHead>APY ↓</TableHead>
-          <TableHead>State</TableHead>
-          <TableHead>Start date</TableHead>
-          <TableHead>Liquidity</TableHead>
-          <TableHead></TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {vaults.map((vault) => (
-          <TableRow key={vault.symbol}>
-            <TableCell className="font-medium">
-              <div className="flex items-center gap-2">
-                <Avatar className="h-6 w-6">
-                  <img src={`/placeholder.svg?height=24&width=24`} alt={vault.name} />
-                </Avatar>
-                <div>
-                  <div className="font-medium">{vault.name}</div>
-                  <div className="text-xs text-muted-foreground">{vault.price}</div>
-                </div>
-              </div>
-            </TableCell>
-            <TableCell className="text-green-500">{vault.daily}</TableCell>
-            <TableCell>{vault.balance}</TableCell>
-            <TableCell>{vault.apy}</TableCell>
-            <TableCell>
-              <span
-                className={`inline-flex items-center rounded-full px-2 py-1 text-xs ${
-                  vault.state === "Fixed" ? "bg-yellow-500/10 text-yellow-500" : "bg-green-500/10 text-green-500"
-                }`}
-              >
-                {vault.state}
+
+    <motion.div layout transition={{ duration: 1.2 }} >
+      <Table>
+        <TableHeader className="text-white">
+          <TableRow>
+            <TableHead className="text-white">Song Name</TableHead>
+            <TableHead className="text-white">Originated</TableHead>
+            <TableHead className="text-white">Duration</TableHead>
+            <TableHead className="text-white">Genre</TableHead>
+            <TableHead className="text-white">Rated by user</TableHead>
+            <TableHead className="text-white ">
+              <span className="flex justify-start items-center" >
+                <button onClick={() => handleSortClick("streamCount")}>
+                  Stream Count {sortField === "streamCount" ? (sortOrder === "asc" ? "▲" : "▼") : ""}
+                </button>
               </span>
-            </TableCell>
-            <TableCell>{vault.startDate}</TableCell>
-            <TableCell>
-              <div className="flex gap-1">
-                {Array.from({ length: 3 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className={`h-1.5 w-3 rounded-full ${
-                      i < (vault.liquidity === "high" ? 3 : vault.liquidity === "medium" ? 2 : 1)
-                        ? "bg-primary"
-                        : "bg-muted"
-                    }`}
-                  />
-                ))}
-              </div>
-            </TableCell>
-            <TableCell>
-              <MoreHorizontal className="h-4 w-4 text-muted-foreground" />
-            </TableCell>
+            </TableHead>
+            <TableHead className="text-white ">
+              <span className="flex justify-start items-center" >
+                <button onClick={() => handleSortClick("dateStreamed")}>
+                  Date Streamed {sortField === "dateStreamed" ? (sortOrder === "asc" ? "▲" : "▼") : ""}
+                </button>
+
+              </span>
+            </TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {sortedStreams.map((stream) => (
+            <TableRow key={stream.songName} >
+              <TableCell className="font-medium">
+                <div className="flex items-center gap-2">
+
+                  <div>
+                    <div className="font-medium">{stream.songName}</div>
+                    <div className="text-xs text-muted-foreground">{stream.dateStreamed}</div>
+                  </div>
+                </div>
+              </TableCell>
+              <TableCell className="text-green-500">{stream.album}</TableCell>
+              <TableCell>{stream.duration}</TableCell>
+              <TableCell>{stream.genre}</TableCell>
+              <TableCell>
+                <span
+                  className={`inline-flex items-center rounded-full px-2 py-1 text-xs ${stream.streamCount > 1000 ? "bg-green-500/10 text-green-500" : "bg-red-500/10 text-red-500"
+                    }`}
+                >
+                  {stream.streamCount > 1000 ? "Rated Good" : "Rated Bad"}
+                </span>
+              </TableCell>
+              <TableCell>
+                {stream.streamCount}
+
+              </TableCell>
+
+              <TableCell>
+                {stream.dateStreamed}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </motion.div>
   )
 }
 

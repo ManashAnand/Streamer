@@ -1,6 +1,6 @@
 "use client"
 
-import { Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts"
+import {  Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts"
 
 const data01 = [
     { name: "Subscriptions", value: 60000 },

@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input"
 import { MetricsCard } from "@/components/custom/DashboardDriven/metrics-card"
 import { StatsChart } from "@/components/custom/DashboardDriven/stats-chart"
 import { VaultTable } from "@/components/custom/DashboardDriven/vault-table"
-import { BarChart3, ChevronDown, Globe, GrapeIcon, Home, LayoutDashboard, LifeBuoy, Settings, User, UserIcon, Wallet, WorkflowIcon } from "lucide-react"
+import { BarChart3, ChevronDown, Globe, Home, LayoutDashboard, LifeBuoy, Settings, User, UserIcon, Wallet, WorkflowIcon } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 
@@ -122,7 +122,7 @@ const Dashboard = () => {
                                                 {
                                                     hoveredIndex == idx && (
                                                         <motion.span
-                                                            className="absolute inset-0 h-full w-full bg-green-400/[0.8] block  rounded-3xl"
+                                                            className="absolute inset-0 h-full w-full bg-green-400/[0.8] block  rounded-2xl"
                                                             layoutId="hoverBackground"
                                                             initial={{ opacity: 0 }}
                                                             animate={{
